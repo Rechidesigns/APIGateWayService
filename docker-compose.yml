@@ -1,0 +1,14 @@
+services:
+  apigateway:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - AUTH_SERVICE_URL=http://auth_service:80
+      - PRODUCT_SERVICE_URL=http://product_service:80
+    depends_on:
+      - auth_service
+      - product_service
+    extra_hosts:
+      - "auth_service:host-gateway"
+      - "product_service:host-gateway"
