@@ -4,22 +4,22 @@ const axios = require('axios')
 const { error } = require('console')
 const app = express();
 
-const authUrl = 'http://localhost:8090/api/';
+//const authUrl = 'http://localhost:8090/api/';
+const authUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8090/api/';
 
 // Product & Inventory Service (Django Rest Framework) URL
 const productUrl = 'http://localhost:8000/api/v1/';
 
 // Route for authentication service
-app.post('/api/authenticate', async (req, res) => {
+app.post('/api/auth/register', async (req, res) => {
   try {
-    const response = await axios.post(authUrl + 'authenticate', req.body); // Adjust endpoint as per your .NET Core API
+    const response = await axios.post(authUrl + 'Account/register', req.body);
     res.json(response.data);
   } catch (error) {
     console.error('Error connecting to Authentication Service:', error.message);
     res.status(500).send('Error connecting to Authentication Service');
   }
 });
-
 
 // Route for product service
 app.get('/api/products', async (req, res) => {
@@ -33,8 +33,9 @@ app.get('/api/products', async (req, res) => {
 });
 
 
-app.listen(80, () => {
-  console.log('API Gateway listening on port 80');
+const PORT = process.env.PORT || 80;
+app.listen(PORT, () => {
+  console.log(`API Gateway listening on port ${PORT}`);
 });
 
 

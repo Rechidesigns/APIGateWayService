@@ -1,1 +1,14 @@
-GET http://localhost:3000
+###
+
+POST http://localhost:8090/api/Account/register
+Content-Type: application/json
+
+{
+  "firstName": "king",
+  "lastName": "rechi",
+  "email": "king2@gmail.com",
+  "password": "Alexwhite96#",
+  "isSeller": true
+}
+
+###
