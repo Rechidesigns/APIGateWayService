@@ -4,32 +4,34 @@ const axios = require('axios')
 const { error } = require('console')
 const app = express();
 
-// Authentication Service (.NET Core API) URL
-const authUrl = 'http://auth_service:80/api/authenticate';
+const authUrl = 'http://localhost:8090/api/';
 
 // Product & Inventory Service (Django Rest Framework) URL
-const productUrl = 'http://product_service:80/api/products/';
+const productUrl = 'http://localhost:8000/api/v1/';
 
-// API Gateway Endpoints
-app.use('/auth', async (req, res) => {
+// Route for authentication service
+app.post('/api/authenticate', async (req, res) => {
   try {
-    const response = await axios.post(authUrl, req.body);
+    const response = await axios.post(authUrl + 'authenticate', req.body); // Adjust endpoint as per your .NET Core API
     res.json(response.data);
   } catch (error) {
-    console.error(error);
+    console.error('Error connecting to Authentication Service:', error.message);
     res.status(500).send('Error connecting to Authentication Service');
   }
 });
 
-app.use('/products', async (req, res) => {
+
+// Route for product service
+app.get('/api/products', async (req, res) => {
   try {
-    const response = await axios.get(productUrl);
+    const response = await axios.get(productUrl + 'products'); // Adjust endpoint as per your Django API
     res.json(response.data);
   } catch (error) {
-    console.error(error);
+    console.error('Error connecting to Product & Inventory Service:', error.message);
     res.status(500).send('Error connecting to Product & Inventory Service');
   }
 });
+
 
 app.listen(80, () => {
   console.log('API Gateway listening on port 80');
