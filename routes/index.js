@@ -4,11 +4,13 @@ const axios = require('axios')
 const { error } = require('console')
 const app = express();
 
-//const authUrl = 'http://localhost:8090/api/';
+//auth (dotnet) authUrl = 'http://localhost:8090/api/';
 const authUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8090/api/';
 
 // Product & Inventory Service (Django Rest Framework) URL
 const productUrl = 'http://localhost:8000/api/v1/';
+
+
 
 // Route for authentication service
 app.post('/api/auth/register', async (req, res) => {
