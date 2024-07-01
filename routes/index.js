@@ -21,6 +21,63 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const response = await axios.post(authUrl + 'Account/login', req.body);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error connecting to Authentication Service:', error.message);
+    res.status(500).send('Error connecting to Authentication Service');
+  }
+});
+
+app.post('/api/auth/refresh-token', async (req, res) => {
+  try {
+    const response = await axios.post(authUrl + 'Account/refresh-token', req.body);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error connecting to Authentication Service:', error.message);
+    res.status(500).send('Error connecting to Authentication Service');
+  }
+});
+
+
+app.post('/api/auth/change-password', async (req, res) => {
+  try {
+    const response = await axios.post(authUrl + 'Account/change-password', req.body);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error connecting to Authentication Service:', error.message);
+    res.status(500).send('Error connecting to Authentication Service');
+  }
+});
+
+
+app.post('/api/auth/logout', async (req, res) => {
+  try {
+    const accessToken = req.body.accessToken; // Extract the token from the request body
+    const response = await axios.post(authUrl + 'Account/logout', req.body, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error connecting to Authentication Service:', error.message);
+    if (error.response && error.response.status === 401) {
+      res.status(401).send('Unauthorized');
+    } else {
+      res.status(500).send('Error connecting to Authentication Service');
+    }
+  }
+});
+
+
+
+
+
+
+
 // Route for product service
 app.get('/api/products', async (req, res) => {
   try {

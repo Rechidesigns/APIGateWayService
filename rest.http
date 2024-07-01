@@ -6,9 +6,43 @@ Content-Type: application/json
 {
   "firstName": "king",
   "lastName": "rechi",
-  "email": "king2@gmail.com",
+  "email": "king5@gmail.com",
   "password": "Alexwhite96#",
   "isSeller": true
 }
 
 ###
+POST http://localhost:8090/api/Account/login
+Content-Type: application/json
+
+{
+  "email": "king5@gmail.com",
+  "password": "Alexblue96#"
+}
+
+###
+POST http://localhost:8090/api/Account/refresh-token
+Content-Type: application/json
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0ZWEzMzBmYy1kZjBmLTRkMTctOTllYy00MWRjYzAxYWJhZGMiLCJlbWFpbCI6Imtpbmc1QGdtYWlsLmNvbSIsInVuaXF1ZV9uYW1lIjoia2luZzVAZ21haWwuY29tIiwianRpIjoiMmFmYTJiMDEtYmZmMi00ZGZkLTgyMGEtODcxNTllMWE4ZDkyIiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIwMiIsImF1ZCI6WyJodHRwczovL2xvY2FsaG9zdDo3MjAyIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIwMiJdLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwibmJmIjoxNzE5ODQ2NzE4LCJleHAiOjE3MTk5MzMxMTgsImlhdCI6MTcxOTg0NjcxOH0.8-F34pTrmovdpLOR7D70GGESleuoQgKBVf9juASNNvc",
+  "refreshToken": "2oyWRCB87qpLBtYw9q8C5+WnfwK+2N+esm9sKe/bOQ9oi9T4SM19htK73lmAy5PjjZCxMVNkz/UCi2VQ6pTl9g=="
+}
+
+### change password
+POST http://localhost:8090/api/Account/change-password/king5@gmail.com
+Content-Type: application/json
+
+{
+  "oldPassword": "Alexwhite96#",
+  "newPassword": "Alexblue96#",
+  "confirmNewPassword": "Alexblue96#"
+}
+
+### logout 
+POST http://localhost:8090/api/Account/logout
+Content-Type: application/json
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0ZWEzMzBmYy1kZjBmLTRkMTctOTllYy00MWRjYzAxYWJhZGMiLCJlbWFpbCI6Imtpbmc1QGdtYWlsLmNvbSIsInVuaXF1ZV9uYW1lIjoia2luZzVAZ21haWwuY29tIiwianRpIjoiOThkYmFhMmUtYzE5My00NjUyLThiYzItMzc5OTQzOWQyODdlIiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIwMiIsImF1ZCI6WyJodHRwczovL2xvY2FsaG9zdDo3MjAyIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NzIwMiJdLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwibmJmIjoxNzE5ODUyMzc1LCJleHAiOjE3MTk5Mzg3NzUsImlhdCI6MTcxOTg1MjM3NX0.dgbcdvC4uFA6H71EOW-3iqIi_uhwVeR5YHOWIUtaUe4"
+}
